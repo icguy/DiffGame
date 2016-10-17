@@ -1,2 +1,2 @@
 # DiffGame
-diff game
+diff game by e.alot and d.alot
