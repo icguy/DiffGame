@@ -1,8 +1,6 @@
 import os
 from os.path import join
 import pygame
-import cv2
-import numpy as np
 from DiffManager import DiffManager
 from preproc import *
 
