@@ -1,10 +1,8 @@
 import os
 from os.path import join
 import pygame
-import cv2
-import numpy as np
 from DiffManager import DiffManager
-from preproc import *
+from preproc2 import *
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 IMG_DIR = join(ROOT_DIR, "images")
@@ -17,7 +15,7 @@ canvas = pygame.Surface((img_w * 2, img_h))
 screen = pygame.display.set_mode((img_w * 2, img_h))
 img1 = img1.convert()
 img2 = img2.convert()
-mask = cv2.imread(join(IMG_DIR, "img1_mask.png"), 0)
+mask = pygame.image.load(join(IMG_DIR, "img1_mask.png")).convert()
 print "bboxes"
 indices, newidx = indexObjects(mask)
 bboxes = boundingBoxes(indices)
@@ -54,3 +52,5 @@ while not done:
 
     pygame.display.flip()
     clock.tick(60)
+
+pygame.quit()
