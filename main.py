@@ -4,21 +4,24 @@ import pygame
 from DiffManager import DiffManager
 from preproc2 import *
 import level_data
+import random
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 IMG_DIR = join(ROOT_DIR, "images")
+IMG_RESOLUTION = 600, 900
 levels = level_data.get_levels()
 
 if __name__ == '__main__':
     pygame.init()
-    img1 = pygame.image.load(join(IMG_DIR, "img1_1.jpg"))
-    img2 = pygame.image.load(join(IMG_DIR, "img1_2.jpg"))
-    img_w, img_h = img1.get_rect().size
+    level = levels[random.randint(0, len(levels) - 1)]
+    img1 = pygame.image.load(join(IMG_DIR, level[0]))
+    img2 = pygame.image.load(join(IMG_DIR, level[1]))
+    img_w, img_h = IMG_RESOLUTION
     canvas = pygame.Surface((img_w * 2, img_h))
     screen = pygame.display.set_mode((img_w * 2, img_h))
     img1 = img1.convert()
     img2 = img2.convert()
-    mask = pygame.image.load(join(IMG_DIR, "img1_mask.png")).convert()
+    mask = pygame.image.load(join(IMG_DIR, level[2])).convert()
     print "bboxes"
     indices, newidx = indexObjects(mask)
     bboxes = boundingBoxes(indices)
