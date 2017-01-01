@@ -27,6 +27,11 @@ def inBounds(img, r, c):
     w, h = img.get_size()
     return 0 <= c < w and 0 <= r < h
 
+def isBlack(img, c, r):
+    color = img.get_at((c, r))
+    threshold = 60
+    return threshold > sum(color[:3])
+
 def indexObjects(img):
     indices = zeros(*img.get_size())
     toCheck = []
@@ -36,7 +41,7 @@ def indexObjects(img):
 
     for r in range(h):
         for c in range(w):
-            if img.get_at((c, r)) != (0, 0, 0) and indices.get_at((c, r)) == (0, 0, 0):
+            if not isBlack(img, c, r) and indices.get_at((c, r)) == (0, 0, 0):
                 toCheck.append((c, r))
                 while len(toCheck) > 0:
                     cc, cr = toCheck[0]
@@ -44,7 +49,7 @@ def indexObjects(img):
                         toCheck.pop(0)
                         continue
 
-                    if img.get_at((cc, cr))!= (0, 0, 0) and indices.get_at((cc, cr)) == (0, 0, 0):
+                    if not isBlack(img, cc, cr) and indices.get_at((cc, cr)) == (0, 0, 0):
                         indices.set_at((cc, cr), (newIdx, newIdx, newIdx))
                         toCheck.append((cc - 1, cr))
                         toCheck.append((cc + 1, cr))
@@ -81,7 +86,7 @@ def getBoundingBox(img, val = (255, 255, 255)):
 
 def test():
     pygame.init()
-    img = pygame.image.load("images/img1_mask.png")
+    img = pygame.image.load("images/img1_mask.jpg")
     w, h = img.get_size()
     screen = pygame.display.set_mode((w, h))
     img = img.convert()
