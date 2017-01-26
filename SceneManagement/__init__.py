@@ -19,12 +19,16 @@ class SceneManager:
     def updateScene(self, sceneName):
         #if scene object was given
         if sceneName in self.sceneDict.values():
+            if self.activeScene:
+                self.activeScene.unload()
             self.activeScene = sceneName
             self.activeScene.load()
             return
 
         #if key was given
         if sceneName in self.sceneDict:
+            if self.activeScene:
+                self.activeScene.unload()
             self.activeScene = self.sceneDict[sceneName]
             self.activeScene.load()
             return

@@ -14,6 +14,7 @@ class LevelScene(SceneManagement.Scene):
         self.name = level[0]
         self.diffManager = None
         self.loaded = False
+        self.nextLevelName = nextLevelName
 
     def load(self):
         if self.loaded:
