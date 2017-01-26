@@ -1,7 +1,5 @@
 import pygame
 
-# todo wipe out opencv from this code
-
 def get_max(img):
     w, h = img.get_size()
     return max([max([max(img.get_at((i, j))[:3]) for i in range(w)]) for j in range(h)])

@@ -2,8 +2,6 @@ import numpy as np
 import cv2
 import pygame
 
-# todo wipe out opencv from this code
-
 def boundingBoxes(diff_img, vals = None):
     idx_dict = {}
     if vals is None:
