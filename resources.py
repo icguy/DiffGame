@@ -1,0 +1,3 @@
+ROOT_DIR = None
+IMG_DIR = None
+IMG_RESOLUTION = None

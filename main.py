@@ -6,25 +6,26 @@ from preproc2 import *
 import level_data
 import random
 from cache import get_cache
+import resources
 
-ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
-IMG_DIR = join(ROOT_DIR, "images")
-IMG_RESOLUTION = 600, 900
+resources.ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+resources.IMG_DIR = join(resources.ROOT_DIR, "images")
+resources.IMG_RESOLUTION = 600, 900
 levels = level_data.get_levels()
 
 
 def main():
     pygame.init()
     level = levels[random.randint(0, len(levels) - 1)]
-    img1 = pygame.image.load(join(IMG_DIR, level[0]))
-    img2 = pygame.image.load(join(IMG_DIR, level[1]))
-    img_w, img_h = IMG_RESOLUTION
+    img1 = pygame.image.load(join(resources.IMG_DIR, level[0]))
+    img2 = pygame.image.load(join(resources.IMG_DIR, level[1]))
+    img_w, img_h = resources.IMG_RESOLUTION
     canvas = pygame.Surface((img_w * 2, img_h))
     screen = pygame.display.set_mode((img_w * 2, img_h))
     img1 = img1.convert()
     img2 = img2.convert()
     print "bboxes"
-    maskfile = join(IMG_DIR, level[2])
+    maskfile = join(resources.IMG_DIR, level[2])
     bboxes = get_cache(maskfile, get_bboxes)
     print "bboxes done"
     dm = DiffManager(img1, img2, bboxes, canvas, (0, 0), (img_w, 0))
