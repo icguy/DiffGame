@@ -46,8 +46,7 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 loc = pygame.mouse.get_pos()
                 dm.click(loc)
-                if len(dm.bboxes) == 0:
-                    done = True
+                done = dm.isDone()
 
         dm.draw(canvas)
         screen.fill((255, 128, 0))

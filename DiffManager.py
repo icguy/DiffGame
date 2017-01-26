@@ -28,7 +28,8 @@ class DiffManager:
             self.bboxes.remove(box)
         print len(self.bboxes)
 
-        self.draw()
+    def isDone(self):
+        return len(self.bboxes) == 0
 
     def draw(self, canvas):
         canvas.blit(self.img1, self.origin1)
