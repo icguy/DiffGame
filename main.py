@@ -34,7 +34,6 @@ def main():
     clock = pygame.time.Clock()
     dm.draw(canvas)
     screen.blit(canvas, (0, 0))
-    found_list = set()
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
