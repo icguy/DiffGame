@@ -25,9 +25,9 @@ class DiffManager:
                 box = bb
                 break
 
-        print len(self.bboxes)
         if box is not None:
             self.bboxes.remove(box)
+        print len(self.bboxes)
 
         self.draw()
 
