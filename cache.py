@@ -12,6 +12,7 @@ def get_cache(filename, function):
             print "cache: error. unable to read file"
 
     print "cache: calling processing func"
+    assert function is not None
     data = function(filename)
     try:
         with file(cache_file, "w") as f:
