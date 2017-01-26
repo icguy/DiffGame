@@ -2,11 +2,10 @@ import pygame
 from utils import *
 
 class DiffManager:
-    def __init__(self, img1, img2, bboxes, canvas, origin1, origin2):
+    def __init__(self, img1, img2, bboxes, origin1, origin2):
         self.img1 = img1
         self.img2 = img2
         self.bboxes = bboxes.values()
-        self.canvas = canvas
         self.origin1 = origin1
         self.origin2 = origin2
 
@@ -31,9 +30,9 @@ class DiffManager:
 
         self.draw()
 
-    def draw(self):
-        self.canvas.blit(self.img1, self.origin1)
-        self.canvas.blit(self.img2, self.origin2)
+    def draw(self, canvas):
+        canvas.blit(self.img1, self.origin1)
+        canvas.blit(self.img2, self.origin2)
 
 if __name__ == '__main__':
     pass

@@ -5,14 +5,13 @@ from DiffManager import DiffManager
 from preproc2 import *
 import level_data
 import random
-from cache import get_cache
+import cache
 import resources
 
 resources.ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 resources.IMG_DIR = join(resources.ROOT_DIR, "images")
 resources.IMG_RESOLUTION = 600, 900
 levels = level_data.get_levels()
-
 
 def main():
     pygame.init()
@@ -24,16 +23,16 @@ def main():
     screen = pygame.display.set_mode((img_w * 2, img_h))
     img1 = img1.convert()
     img2 = img2.convert()
-    print "bboxes"
-    maskfile = join(resources.IMG_DIR, level[2])
-    bboxes = get_cache(maskfile, get_bboxes)
-    print "bboxes done"
-    dm = DiffManager(img1, img2, bboxes, canvas, (0, 0), (img_w, 0))
     canvas = canvas.convert()
     canvas.fill((255, 128, 0))
+    print "bboxes"
+    maskfile = join(resources.IMG_DIR, level[2])
+    bboxes = cache.get_cache(maskfile, get_bboxes)
+    print "bboxes done"
+    dm = DiffManager(img1, img2, bboxes, (0, 0), (img_w, 0))
     done = False
     clock = pygame.time.Clock()
-    dm.draw()
+    dm.draw(canvas)
     screen.blit(canvas, (0, 0))
     found_list = set()
     while not done:
@@ -51,21 +50,19 @@ def main():
                 if len(dm.bboxes) == 0:
                     done = True
 
-        dm.draw()
+        dm.draw(canvas)
         screen.fill((255, 128, 0))
-        screen.blit(dm.canvas, (0, 0))
+        screen.blit(canvas, (0, 0))
 
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
-
 
 def get_bboxes(maskfile):
     mask = pygame.image.load(maskfile).convert()
     indices, newidx = indexObjects(mask)
     bboxes = boundingBoxes(indices)
     return bboxes
-
 
 if __name__ == '__main__':
     main()
